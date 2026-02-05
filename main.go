@@ -4,10 +4,17 @@
 // с публичным API и корректной документацией GoDoc.
 package add
 
-// Add складывает два целых числа и возвращает их сумму.
+import "golang.org/x/exp/constraints"
+
+// Number описывает числовые типы, поддерживающие оператор сложения.
+type Number interface {
+	constraints.Integer | constraints.Float
+}
+
+// Add складывает два числовых значения и возвращает их сумму.
 //
 // Подробное описание операции сложения см. в документации:
 // https://example.com/addition.html
-func Add(a int, b int) int {
+func Add[T Number](a, b T) T {
 	return a + b
 }
